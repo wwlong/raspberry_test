@@ -62,7 +62,7 @@ void *th_prompt_tone_open_door(void *args)
     char thread_name[256] = {0};
     sprintf(thread_name, "%s", __FUNCTION__);
     prctl(PR_SET_NAME, thread_name);
-    char *sound_output_cmd = "mpg321 /workspace/github_work/raspberry/sound/sound_materials/nokia-tune.mp3";
+    char *sound_output_cmd = "mpg321 ../sound_materials/nokia-tune.mp3";
     while(1) {
         sem_wait(&entrance_sem);
         system(sound_output_cmd);
