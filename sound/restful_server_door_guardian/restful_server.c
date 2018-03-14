@@ -13,7 +13,7 @@
 /* Private define ------------------------------------------------------------*/
 #define UNUSED_ARGUMENT(x) (void)x
 /* private constants --------------------------------------------------------*/
-static const char *s_http_port = "8000";
+static const char *s_http_port = "9000";
 static struct mg_serve_http_opts s_http_server_opts;
 //同步信号量for sound output and GPIO control
 sem_t entrance_sem_success;
@@ -66,7 +66,7 @@ void *th_prompt_tone_open_door(void *args)
   char thread_name[256] = {0};
   sprintf(thread_name, "%s", __FUNCTION__);
   prctl(PR_SET_NAME, thread_name);
-  char *sound_output_cmd = "mpg321 ../sound_materials/nokia-tune.mp3";
+  char *sound_output_cmd = "mpg321 ../sound_materials/water.mp3";
   while (1)
   {
     sem_wait(&entrance_sem_success);
@@ -84,7 +84,7 @@ void *th_prompt_tone_warning(void *args)
   char thread_name[256] = {0};
   sprintf(thread_name, "%s", __FUNCTION__);
   prctl(PR_SET_NAME, thread_name);
-  char *sound_output_cmd = "mpg321 ../sound_materials/warning.mp3";
+  char *sound_output_cmd = "mpg321 ../sound_materials/didi_warning.mp3";
   while (1)
   {
     sem_wait(&entrance_sem_failed);
