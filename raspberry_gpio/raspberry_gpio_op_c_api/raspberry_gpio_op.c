@@ -24,8 +24,8 @@ int GPIOExport(int pin)
     ret = write(fd, buffer, len);
     close(fd);
 
-    if(ret <= 0) {
-        printf("write failed\n");
+    if(ret < 0) {
+        printf("write failed ret : %d - %s -- %d\n", ret, __FUNCTION__, __LINE__);
         return -1;
     }
     return(0);
@@ -48,7 +48,7 @@ int GPIOUnexport(int pin)
     close(fd);
 
     if(ret <= 0) {
-        printf("write failed\n");
+        printf("write failed ret : %d - %s -- %d\n", ret, __FUNCTION__, __LINE__);
         return -1;
     }
     return(0);
