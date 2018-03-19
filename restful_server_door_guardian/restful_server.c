@@ -62,16 +62,17 @@ void *th_prompt_tone_open_door(void *args)
      *  开门提示音
      * */
     system(sound_output_cmd);
+    sleep(2);
     /*
      *  关闭开门信号
      * */
-    GPIOWrite(OPEN_DOOR_LED, LOW);
+    GPIOWrite(OPEN_DOOR_SIGNAL, LOW);
     GPIOUnexport(OPEN_DOOR_SIGNAL);
     /*
      *  关闭开门提示灯
      * */
     GPIOWrite(OPEN_DOOR_LED, LOW);
-    GPIOUnexport(OPEN_DOOR_SIGNAL);
+    GPIOUnexport(OPEN_DOOR_LED);
   }
 }
 /*
@@ -100,6 +101,12 @@ void *th_prompt_tone_warning(void *args)
      *  播放告警声
      * */
     system(sound_output_cmd);
+    sleep(2);
+    /*
+     *  关闭warning led 
+     * */
+    GPIOWrite(WARNING_LED, LOW);
+    GPIOUnexport(WARNING_LED);
   }
 }
 /*

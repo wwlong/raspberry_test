@@ -13,7 +13,7 @@ int GPIOExport(int pin)
     char buffer[BUFFER_MAX];
     int len;
     int fd;
-
+    int ret;
     fd = open("/sys/class/gpio/export", O_WRONLY);
     if (fd < 0) {
         fprintf(stderr, "Failed to open export for writing!\n");
@@ -21,9 +21,13 @@ int GPIOExport(int pin)
     }  
 
     len = snprintf(buffer, BUFFER_MAX, "%d", pin);
-    write(fd, buffer, len);
-
+    ret = write(fd, buffer, len);
     close(fd);
+
+    if(ret <= 0) {
+        printf("write failed\n");
+        return -1;
+    }
     return(0);
 }
 
@@ -32,7 +36,7 @@ int GPIOUnexport(int pin)
     char buffer[BUFFER_MAX];
     int len;
     int fd;
-
+    int ret;
     fd = open("/sys/class/gpio/unexport", O_WRONLY);
     if (fd < 0) {
         fprintf(stderr, "Failed to open unexport for writing!\n");
@@ -40,9 +44,13 @@ int GPIOUnexport(int pin)
     }
 
     len = snprintf(buffer, BUFFER_MAX, "%d", pin);
-    write(fd, buffer, len);
-
+    ret = write(fd, buffer, len);
     close(fd);
+
+    if(ret <= 0) {
+        printf("write failed\n");
+        return -1;
+    }
     return(0);
 }
 
