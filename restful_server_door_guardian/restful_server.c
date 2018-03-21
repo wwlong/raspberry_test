@@ -42,7 +42,7 @@ void *th_prompt_tone_open_door(void *args)
   char thread_name[256] = {0};
   sprintf(thread_name, "%s", __FUNCTION__);
   prctl(PR_SET_NAME, thread_name);
-  char *sound_output_cmd = "mpg321 ../sound_materials/water.mp3";
+  char *sound_output_cmd = "mpg321 ../sound_materials/welcome.mp3";
   while (1)
   {
     sem_wait(&entrance_sem_success);
@@ -127,14 +127,14 @@ static void open_the_door(struct mg_connection *nc, struct http_message *hm)
      * */
   printf("result : %s\n", result);
   result_num = atoi(result);
-  if(1 == result_num) {
+  if(200 == result_num) {
     sem_post(&entrance_sem_success);
     /* Send headers */
     mg_printf(nc, "%s", "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n");
-    mg_printf_http_chunk(nc, "{ \"result\": %s }", "open_success_response");
+    mg_printf_http_chunk(nc, "{\"result\":\"%s\"}", "open_success_response");
     mg_send_http_chunk(nc, "", 0); /* Send empty chunk, the end of response */
   }
-  else if(0 == result_num) {
+  else if(400 == result_num) {
     sem_post(&entrance_sem_failed);
     /* Send headers */
     mg_printf(nc, "%s", "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n");
@@ -142,6 +142,7 @@ static void open_the_door(struct mg_connection *nc, struct http_message *hm)
     mg_send_http_chunk(nc, "", 0); /* Send empty chunk, the end of response */
   }
   else {
+    sem_post(&entrance_sem_failed);
     /* Send headers */
     mg_printf(nc, "%s", "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n");
     mg_printf_http_chunk(nc, "{ \"result\": \"%s\" }", "invalid_query_params");
