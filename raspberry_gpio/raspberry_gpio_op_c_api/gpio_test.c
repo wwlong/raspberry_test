@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "raspberry_gpio_op.h"
-
+#include "gpio_test.h"
 int main(int argc, char *argv[])
 {
     int i = 0;

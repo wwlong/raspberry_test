@@ -19,10 +19,6 @@ extern "C" {
 #define POUT            17  
 #define BUFFER_MAX      3
 #define DIRECTION_MAX   48
-#define OPEN_DOOR_LED   17
-#define CLOSE_DOOR_LED  17
-#define WARNING_LED     18
-#define OPEN_DOOR_SIGNAL   26
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 int GPIOExport(int pin);
