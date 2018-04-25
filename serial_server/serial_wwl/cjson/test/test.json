@@ -1,0 +1,34 @@
+{
+    "family_name": "happy homes",
+    "family_members": {
+        "father": {
+            "name": "jack",
+            "age": "40",
+            "sex": "male",
+            "phone_num": "123456"
+        },
+        "mother": {
+            "name": "lily",
+            "age": "40",
+            "sex": "female",
+            "phone_num": "123456"
+        },
+        "son": {
+            "name": "jack",
+            "age": "10",
+            "sex": "male",
+            "phone_num": ""
+        },
+        "daughter": {
+            "name": "mary",
+            "age": "8",
+            "sex": "female",
+            "phone_num": "123456"
+        }
+    },
+    "location": {
+        "contient": "Asia",
+        "country": "China",
+        "rovince": "shanghai"
+    }
+}
